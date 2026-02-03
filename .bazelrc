@@ -1,0 +1,3 @@
+# Use Bzlmod (enabled by default in Bazel 9)
+# Remove the disable flags to use MODULE.bazel
+

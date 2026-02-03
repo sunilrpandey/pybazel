@@ -1,0 +1,38 @@
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+cov_env/
+.venv/
+venv/
+ENV/
+env/
+
+# Coverage reports
+.coverage
+.coverage.*
+coverage.xml
+coverage_html/
+htmlcov/
+.pytest_cache/
+
+# Bazel
+bazel-*
+.bazelrc.user
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
