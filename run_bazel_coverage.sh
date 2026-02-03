@@ -14,10 +14,7 @@ if [ ! -d "bazel-bin" ]; then
 fi
 
 # Run tests with Bazel coverage
-bazel coverage //src:test_calculator \
-               //src:test_string_utils \
-               //src:test_data_processor \
-               //tests:test_integration \
+bazel coverage //src/tests/... \
                --combined_report=lcov \
                --instrumentation_filter="//src[/:]" \
                --test_output=errors
