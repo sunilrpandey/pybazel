@@ -9,8 +9,11 @@ py_test(
     deps = [
         "//src:calculator",
         "@pip_deps//pytest",
+        "@pip_deps//pytest_cov",
+        "@pip_deps//coverage",
     ],
     main = "test_calculator.py",
+    env = {"COVERAGE_FILE": ".coverage"},
 )
 
 py_test(
@@ -22,6 +25,9 @@ py_test(
     deps = [
         "//src:string_utils",
         "@pip_deps//pytest",
+        "@pip_deps//pytest_cov",
+        "@pip_deps//coverage",
     ],
     main = "test_string_utils.py",
+    env = {"COVERAGE_FILE": ".coverage"},
 )

@@ -4,27 +4,41 @@
 set -e
 
 echo "======================================"
-echo "Running Bazel Tests with Coverage"
+echo "Running Tests with Coverage"
 echo "======================================"
 
-# First, ensure dependencies are installed
-if [ ! -d "bazel-bin" ]; then
-    echo "Building project first..."
-    bazel build //src:all //tests:all
+# Ensure pytest and dependencies are available
+if [ -d "cov_env" ]; then
+    echo "Using existing cov_env virtual environment..."
+    source cov_env/bin/activate
+elif [ -d ".venv" ]; then
+    echo "Using existing .venv virtual environment..."
+    source .venv/bin/activate
+else
+    echo "Creating virtual environment..."
+    python3 -m venv .venv
+    source .venv/bin/activate
+    echo "Installing dependencies..."
+    pip install -q -r requirements.txt
 fi
 
-# Run tests with Bazel coverage
-bazel coverage //src/tests/... \
-               --combined_report=lcov \
-               --instrumentation_filter="//src[/:]" \
-               --test_output=errors
+# Run tests with pytest and coverage
+echo "Running tests with pytest-cov..."
+python3 -m pytest src/tests/ \
+    --cov=src \
+    --cov-report=html:coverage_html \
+    --cov-report=term \
+    --cov-report=xml:coverage.xml \
+    -v
 
 echo ""
 echo "======================================"
-echo "Bazel Coverage Complete!"
+echo "Coverage Complete!"
 echo "======================================"
-echo "Coverage data: bazel-out/_coverage/_coverage_report.dat"
+echo "HTML report: coverage_html/index.html"
+echo "XML report: coverage.xml"
 echo ""
-echo "To generate HTML report, run:"
-echo "  genhtml bazel-out/_coverage/_coverage_report.dat -o coverage_html"
+echo "To view HTML report, run:"
+echo "  python3 -m http.server 8000 -d coverage_html"
+echo "  Then open http://localhost:8000 in your browser"
 echo ""
