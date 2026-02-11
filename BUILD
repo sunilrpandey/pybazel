@@ -1,2 +1,2 @@
 # Root BUILD file
-exports_files(["requirements.txt"])
+exports_files(["requirements.txt", "pyproject.toml"])

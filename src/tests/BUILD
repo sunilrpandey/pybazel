@@ -12,8 +12,12 @@ py_test(
         "@pip_deps//pytest_cov",
         "@pip_deps//coverage",
     ],
+    args = [
+        "test_calculator.py",
+        "-v",
+    ],
     main = "test_calculator.py",
-    env = {"COVERAGE_FILE": ".coverage"},
+    legacy_create_init = False,
 )
 
 py_test(
@@ -28,6 +32,10 @@ py_test(
         "@pip_deps//pytest_cov",
         "@pip_deps//coverage",
     ],
+    args = [
+        "test_string_utils.py",
+        "-v",
+    ],
     main = "test_string_utils.py",
-    env = {"COVERAGE_FILE": ".coverage"},
+    legacy_create_init = False,
 )
